@@ -13,12 +13,6 @@ document.addEventListener("DOMContentLoaded", function() {
         sections.forEach(section => section.classList.toggle("dark-mode"));
         footer.classList.toggle("dark-mode");
     });
-    themeToggle.addEventListener("touch", function() {
-        body.classList.toggle("dark-mode");
-        header.classList.toggle("dark-mode");
-        sections.forEach(section => section.classList.toggle("dark-mode"));
-        footer.classList.toggle("dark-mode");
-    });
 
     // Background Toggle
     const backgrounds = ['bg-1', 'bg-2', 'bg-3', 'bg-4'];
@@ -29,9 +23,25 @@ document.addEventListener("DOMContentLoaded", function() {
         currentBackgroundIndex = (currentBackgroundIndex + 1) % backgrounds.length;
         body.classList.add(backgrounds[currentBackgroundIndex]);
     });
-    backgroundToggle.addEventListener("touch", function() {
-        body.classList.remove(backgrounds[currentBackgroundIndex]);
-        currentBackgroundIndex = (currentBackgroundIndex + 1) % backgrounds.length;
-        body.classList.add(backgrounds[currentBackgroundIndex]);
+
+    // Efecto de escritura
+    const text = "Genís Baños López";
+    const target = document.getElementById("typing-text");
+    let index = 0;
+    function type() {
+        if (index < text.length) {
+            target.textContent += text.charAt(index);
+            index++;
+            setTimeout(type, 100);
+        }
+    }
+    type();
+
+    // Inicializar AOS
+    AOS.init({
+        duration: 1000,
+        once: true,
+        easing: 'ease-in-out'
     });
 });
+
